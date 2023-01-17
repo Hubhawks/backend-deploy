@@ -3,7 +3,7 @@ const { User } = require("../models/user");
 const bcrypt = require("bcrypt");
 const Joi = require("joi");
 const passport = require("passport");
-const CLIENT_URL = "http://localhost:3000/editing";
+const CLIENT_URL = "https://five6250o.onrender.com/editing";
 router.get("/login/success", (req, res) => {
 	if (req.user) {
 	  res.status(200).json({
