@@ -7,6 +7,7 @@ const userRoutes = require("./routes/users");
 const authRoutes = require("./routes/auth");
 const email = require("./routes/email")
 const passportSetup = require("./passport");
+const bodyParser = require('body-parser');
 const cookieSession = require("cookie-session");
 const passport = require("passport");
 // database connection
@@ -22,13 +23,21 @@ app.use(
   app.use(passport.initialize());
   app.use(passport.session());
   
-  app.use(
-	cors({
-	  origin: "http://localhost:3000",
-	  methods: "GET,POST,PUT,DELETE",
-	  credentials: true,
-	})
-  );
+//   app.use(
+// 	cors({
+// 	  origin: "http://localhost:3000",
+// 	  methods: "GET,POST,PUT,DELETE",
+// 	  credentials: true,
+// 	})
+//   );
+  const corsOptions ={
+	origin:'*', 
+	credentials:true,            //access-control-allow-credentials:true
+	optionSuccessStatus:200,
+ }
+ app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors(corsOptions));
   app.use("/auth", authRoutes);
 // routes
 app.use("/api/users", userRoutes);
